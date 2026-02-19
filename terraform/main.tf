@@ -15,6 +15,11 @@ module "iam" {
   source = "./modules/iam"
 }
 
+module "logs" {
+  source = "./modules/logs"
+}
+
+
 module "task_definition" {
   source             = "./modules/task-definition"
   execution_role_arn = module.iam.execution_role_arn

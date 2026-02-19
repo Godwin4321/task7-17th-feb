@@ -11,10 +11,12 @@ resource "aws_ecs_task_definition" "task" {
       name  = "strapi"
       image = var.image_uri
 
-      portMappings = [{
-        containerPort = var.container_port
-        protocol      = "tcp"
-      }]
+      portMappings = [
+        {
+          containerPort = var.container_port
+          protocol      = "tcp"
+        }
+      ]
 
       environment = [
         { name = "NODE_ENV", value = "production" },
@@ -23,6 +25,15 @@ resource "aws_ecs_task_definition" "task" {
         { name = "APP_KEYS", value = "test3,test4,test5,test6" },
         { name = "JWT_SECRET", value = "test7" }
       ]
+
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = "/ecs/strapi"
+          awslogs-region        = "us-east-1"
+          awslogs-stream-prefix = "ecs/strapi"
+        }
+      }
     }
   ])
 }
