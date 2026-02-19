@@ -19,7 +19,6 @@ resource "aws_ecs_task_definition" "task" {
       ]
 
       environment = [
-        { name = "NODE_ENV", value = "production" },
         { name = "ADMIN_JWT_SECRET", value = "test1" },
         { name = "API_TOKEN_SALT", value = "test2" },
         { name = "APP_KEYS", value = "test3,test4,test5,test6" },
